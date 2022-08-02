@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="id" >
+  <div class="body" >
+    <div > <h2>phenologie du riz paddy</h2></div>
+        <p>Cette application utilise des séries temporelle des images satellite Sentinel2 traitées avec l'API python Google Earth Engine pour déterminer la phénologie du riz paddy  dans une zone et une plage des dates sélectionnées par l'utilisateur. Le niveau Sentinel2-2A utilisé par cette application affiche une réflectance de surface corrigée de l'atmosphère avec une résolution de 10 mètres. Ils sont disponibles depuis mars 2018 pour la region de trarza jusqu'à aujourd'hui. 
+          </p>
+        <p>
+          Sur la page d'accueil, l'utilisateur peut sélectionner la date de début et la date de fin ainsi qu'un domaine d'intérêt puis clique sur envoyer. l'application va sélectionner seulement la date d'acquisition satellite disponible sur la période sélectionner.
+        </p>
+        <p>
+          L'utilisateur peut visualisée les courbe qui représente les différentes stades phénologique du riz paddy, mais aussi il pourra observer les zones sélectionner.
+        </p> 
+      </div>
+</div>
+
+{% endblock %}

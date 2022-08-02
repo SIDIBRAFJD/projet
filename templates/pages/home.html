@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+    {% if messages%}
+        <p class="messages">
+            {% for message in messages %}
+            <h4 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>
+            {% endfor %}
+        </p>
+    {% endif %}
+    <div class=" row m-1 " style="background: url({% static "image/1.png" %})";>
+        <div class="col-3 "  >
+            
+            <form action="phenology" method="POST">
+                {% csrf_token %}
+                <label>Date de début :</label> <input class="mt-2 " type="date" name="Start_date"><P>
+                <label >Date de fin :</label>  <input class="ml-7  m-3" type="date" name="end_date"><p>
+                <div class="input-group input-group-sm">
+                    <label class="m-1">Point1 : </label ><input placeholder="latitude1" class="form-control w-45 " type="text" name="la1"> <input placeholder="longitude1" class="form-control w-45 " type="text" name="lg1"><P>
+                    </div><br>
+                <div class="input-group input-group-sm">
+                    <label class="m-1">Point2 :</label > <input placeholder="latitude2" class="form-control w-45 h-60" type="text" name="la2"> 
+                    <input placeholder="longitude2" class="form-control w-45 h-60" type="text" name="lg2"> <p>
+                    </div><br>
+                <div class="input-group input-group-sm">
+                    <label class="m-1">Point3 :</label > <input placeholder="latitude3" class="form-control w-45 h-60" type="text" name="la3"> 
+                    <input placeholder="longitude3" class="form-control w-45 h-60" type="text" name="lg3"> <P>
+                    </div><br>
+                <div class="input-group input-group-sm">
+                    <label class="m-1">Point4 : </label ><input placeholder="latitude4" class="form-control w-45 h-60" type="text" name="la4"> 
+                    <input placeholder="longitude4" class="form-control w-45 h-60" type="text" name="lg4"> <p>
+                    </div>
+                    <br>
+                    <p><input type="submit" name="phenology" value="phénologie">
+                        <input type="submit" name="NDWI" value="L'indice d'eau">
+                    </form>
+        </div>
+        <div class="col-lg-9 " id="map" style="width: 75%; height: 550px" >
+            <script>
+                var map = L.map('map').setView([16.843462950466662, -15.327075719833374], 13);
+                //satellite
+                var Imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                }).addTo(map);
+                // open street map
+                var googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+                    maxZoom: 20,
+                    subdomains:['mt0','mt1','mt2','mt3']
+                    });
+                //Hybrid,
+                var googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+                    maxZoom: 20,
+                    subdomains:['mt0','mt1','mt2','mt3']
+                    });
+                //add layer control
+                var baseMaps = {
+                'google satellite':Imagery,
+                'google Streets':googleStreets,
+                'google hybrid':googleHybrid,
+                }
+                L.control.layers(baseMaps).addTo(map);
+                //add map scale 
+                L.control.scale().addTo(map)
+                //affichage des coordonnées de la carte
+                var c = new L.Control.Coordinates();
+		        c.addTo(map);
+
+		        function onMapClick(e) {
+			        c.setCoordinates(e);
+		        }
+                map.on('click', onMapClick);
+            
+            </script>  
+        </div>
+    </div >
+{% endblock %}

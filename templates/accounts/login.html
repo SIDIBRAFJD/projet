@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+{% block content %}
+<div id="id"  style="background: url({% static "image/1.png" %})"; >
+  <div id="bg" class="container w-50 "  >
+    <h4> Connexion</h4>
+      <form method="post" novalidate>
+          {% csrf_token %}
+          {% include 'includes/form.html' %}
+          <div class="mt-2">
+          <button type="submit" class="btn btn-primary">Connexion</button>
+          </div>
+      </form>
+      <div class="card-footer text-muted text-center">
+        Créer un nouveau compte <a href="{%url 'signup'%}">S'enregistre </a>
+        </div>
+      </div>
+  </div>
+</div>
+  
+{% endblock %}

@@ -1,0 +1,24 @@
+#id{
+  height: 550px;
+  width: 100%;
+  border: 1px rgba(12, 12, 12, 0.374);
+}
+
+.body{
+  height: 500px;
+  width: 500px;
+  
+  color: rgb(9, 8, 8);
+  margin-left: 470px;
+  margin-top:  5px;;
+  padding: 10px;
+  
+  background-color: rgba(251, 251, 251, 0.951);
+  background-position: center center;
+  
+}
+.body h2{
+  padding: 0%;
+  text-align: center;
+  background-color: rgb(131, 173, 232);
+}

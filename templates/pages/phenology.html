@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content%}
+
+<div class=" row m-0" id="phenology" >
+    <div class="col-6 mt-4" >
+        <canvas id="myChart" width="120" height="80"></canvas>
+        <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [ {% for d in date %} '{{ d }}',{% endfor%}],
+                datasets: [{
+                    label: 'Cycle phénologique du riz paddy pour une parcelle typique',
+                    data: [{% for v in value %} '{{v}}',{% endfor%}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                    ],
+                    borderColor: [
+                        '	rgb(127,255,0)',
+                    ],
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+    </div>
+
+    <div class="col-6 " style="width:800px;height:540px">
+            {{map.html.render|safe}}
+        <script>
+            {{ map.script.render|safe }}
+        </script>
+    </div>
+</div>
+{% endblock%}
