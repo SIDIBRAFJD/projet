@@ -60,7 +60,7 @@ def phenology(request):
         [la3,lg3],
         [la4,lg4]]]).buffer(50)
         s2 = ((ee.ImageCollection('COPERNICUS/S2_SR'))
-            .filterDate('2019-07-01','2022-07-20')
+            .filterDate(start_date,end_date)
             .filterBounds(polygon)
             .maskClouds(method = 'qa')
             .maskClouds(prob = 30)
